@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
+import Profile from './components/Profile/Profile';
+import Dialogs from './components/Dialogs/Dialogs';
+import { Route } from "react-router-dom";
+import News from './components/News/News';
+import Shop from './components/Shop/Shop';
+import Contacts from './components/Contacts/Contacts';
 
-function App() {
+const App = (props) => {
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className='app-wrapper'>
+        <Header />
+        <Navbar />
+        <div className='app-wrapper-content'>
+          <Route path = '/dialogs'render= {() => <Dialogs state={props.state.dialogPage} sendMessage={props.sendMessage}
+            updateNewMessage ={props.updateNewMessage} newMessage ={props.state.dialogPage.newMessage}
+          />} />
+          <Route path ='/profile'render = {() => <Profile state={props.state.postPage} 
+          addPost={props.addPost} newPostText={props.state.postPage.newPostText}
+          updateNewPostText = {props.updateNewPostText} />  } />
+          <Route path ='/news'component={News} />
+          <Route path ='/shop'component={Shop} />
+          <Route path ='/contacts'component={Contacts} />
+          </div>
+      </div>
+     );
 }
 
 export default App;
