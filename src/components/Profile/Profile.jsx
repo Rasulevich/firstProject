@@ -2,30 +2,31 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import { addPostActionCreator, UpdateNewPostTextActionCreator } from '../../redux/state';
 
 const Profile = (props) => {
 
   let newPostElement = React.createRef();
   let addPost = () => {
-    props.addPost();
-    newPostElement.current.value ='';
+    props.dispatch (addPostActionCreator());
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-  props.updateNewPostText(text);
+    props.dispatch (UpdateNewPostTextActionCreator(text));
   }
+
   return <div className={s.content}>
     <ProfileInfo />
     <div>
-      <textarea onChange ={onPostChange} ref={newPostElement} 
-      value = {props.newPostText} />
+      <textarea onChange={onPostChange} ref={newPostElement}
+        value={props.newPostText} />
     </div>
     <div>
       <button onClick={addPost}>Add Post </button>
     </div>
     <div>
-      <MyPosts postData={props.state.post} />
+      <MyPosts posts={props.profilePage.post} />
     </div>
   </div>
 }
