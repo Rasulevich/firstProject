@@ -9,8 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 let rerenderEnterTreed = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-        <App state={state} dispatch={store.dispatch.bind(store)}  
-        sendMessage={store.sendMessage.bind(store)} updateNewMessage = {store.updateNewMessage.bind(store)} /> 
+        <App state={state} dispatch={store.dispatch.bind(store)} /> 
         </BrowserRouter>, document.getElementById('root'));
 };
 

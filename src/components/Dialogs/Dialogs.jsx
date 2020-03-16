@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
+import { sendMessageActionCreator,updateNewMessageActionCreator } from '../../redux/state';
 
 const DialogItem = (props) => {
     return (
@@ -23,12 +24,12 @@ const Dialogs = (props) => {
     
     let newMessageArea = React.createRef();
     let sendMessage = () => {
-        props.sendMessage();
+        props.dispatch(sendMessageActionCreator());
         newMessageArea.current.value ='';
     }
     let onMessageCghange = () => {
         let text = newMessageArea.current.value;
-  props.updateNewMessage(text);
+        props.dispatch(updateNewMessageActionCreator(text));
     }
 
     return (
