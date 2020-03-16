@@ -1,5 +1,9 @@
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+
 const Add_Post =  'Add-Post';
 const Update_New_Post_Text = 'Update-New-Post-Text';
+
 const Send_Message = 'Send-Message';
 const Update_New_Message = 'Update-New-Message';
 
@@ -38,32 +42,10 @@ let store = {
         this._callSubscriber = observer;
     },
     dispatch (action) {
-        if (action.type === Add_Post){
-            let newElement = {
-                message: this._state.postPage.newPostText,
-                id: '5'
-            }
-            this._state.postPage.post.push(newElement);
-            this._state.postPage.newPostText ='';
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === Update_New_Post_Text){
-            this._state.postPage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === Send_Message) {
-            let newElement = {
-                id: '4',      
-                message:  this._state.dialogPage.newMessage
-            }
-            this._state.dialogPage.message.push(newElement);
-            this._state.dialogPage.newMessage ='';
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === Update_New_Message) {
-            this._state.dialogPage.newMessage = action.newText;
-            this._callSubscriber( this._state);
-        }
+        this._state.postPage = profileReducer (this._state.postPage , action);
+        this._state.dialogPage = dialogsReducer (this._state.dialogPage, action);
+        
+        this._callSubscriber(this._state);     
     }
 } 
 
