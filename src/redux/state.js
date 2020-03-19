@@ -34,7 +34,6 @@ let store = {
     _callSubscriber () {
         console.log('State changed');
     },
-
     getState () {
         return this._state;
     },
@@ -58,5 +57,4 @@ export const updateNewMessageActionCreator = (text) => {
     return {type: Update_New_Message, newText: text}
 };
 
-export default store;
 window.store = store;
