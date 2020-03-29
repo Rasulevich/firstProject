@@ -11,6 +11,8 @@ class UsersC extends React.Component {
         ${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(Response => {
         this.props.setUsers(Response.data.items)
+        this.props.setTotalUsersCount(Response.data.totalCount)
+        
         });
     }
     onPageChanged = (pageNumber) => {
