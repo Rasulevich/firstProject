@@ -19,7 +19,8 @@ const App = (props) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path = '/dialogs'render= {() => <DialogsContainer store={props.store} dispatch={props.dispatch} />} />
-          <Route path ='/profile'render = {() => <ProfileContainer store={props.store} state={props.state} dispatch={props.dispatch} />  } />
+          <Route path ='/profile/:userId?'
+          render = {() => <ProfileContainer store={props.store} state={props.state} dispatch={props.dispatch} />  } />
           <Route path ='/users'render = {() => <UsersContainer store={props.store} state={props.state} dispatch={props.dispatch} />  } />
           <Route path ='/news'component={News} />
           <Route path ='/shop'component={Shop} />

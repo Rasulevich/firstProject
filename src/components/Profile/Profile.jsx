@@ -16,7 +16,7 @@ const Profile = (props) => {
   }
 
   return <div className={s.content}>
-    <ProfileInfo />
+    <ProfileInfo profile={props.profile}/>
     <div>
       <textarea onChange={onPostChange} ref={newPostElement}
         value={props.newPostText} />

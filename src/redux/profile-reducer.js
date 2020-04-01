@@ -1,6 +1,6 @@
 const Add_Post =  'Add-Post';
 const Update_New_Post_Text = 'Update-New-Post-Text';
-
+const set_User_Profile = 'setUserProfile';
 
 let initialState =  {
         post:[
@@ -8,7 +8,8 @@ let initialState =  {
         {message:'Tell me why?', id:2},
         {message:' Go on' , id:3}
     ],
-    newPostText: 'MuslimShop'
+    newPostText: 'MuslimShop',
+    profile:null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -27,9 +28,13 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newPostText:action.newText}; 
+        case set_User_Profile: {
+            return {...state, profile:action.profile}
+        }
         default:
             return state;
 }
 }
  export default profileReducer;
 
+export const setUserProfile = (profile) => ({type:set_User_Profile, profile});

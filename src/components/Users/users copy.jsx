@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './users.module.css'
 import *as axios from 'axios';
-import userPhoto from '../../images/users.jpg';
 import Users from './users';
+import Preloader from '../common/preloader/preloader';
 
 class UsersC extends React.Component {
 
     componentDidMount() {
+        this.props.toogleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
         ${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(Response => {
@@ -16,16 +16,19 @@ class UsersC extends React.Component {
         });
     }
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
+        this.props.setCurrentPage(pageNumber);
+        this.props.toogleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
         ${pageNumber}&count=${this.props.pageSize}`)
         .then(Response => {
-        this.props.setUsers(Response.data.items)
+        this.props.toogleIsFetching(false);
+        this.props.setUsers(Response.data.items);
         });
     }
     render() {
         return (
             <>
+            {this.props.isFetching ?<Preloader/> : null}
                 <Users 
                 currentPage = {this.props.currentPage}
                 users = {this.props.users}
