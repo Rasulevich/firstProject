@@ -1,21 +1,21 @@
 import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import { Route } from "react-router-dom";
-import News from './components/News/News';
-import Shop from './components/Shop/Shop';
+import './App.css';
 import Contacts from './components/Contacts/Contacts';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Navbar from './components/Navbar/Navbar';
+import News from './components/News/News';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import Shop from './components/Shop/Shop';
 import UsersContainer from './components/Users/UsersContainer';
+import HeaderContainer from './components/Header/Header copy';
 
 const App = (props) => {
   
 
   return (
       <div className='app-wrapper'>
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path = '/dialogs'render= {() => <DialogsContainer store={props.store} dispatch={props.dispatch} />} />
