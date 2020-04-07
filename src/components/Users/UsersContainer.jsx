@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import UsersC from './users copy';
-import { followAC, UnfollowAC, setUsersAC, setCurrentPageAc, 
-setTotalUsersCountAC, toogleIsFetchingAC } from '../../redux/users-reducer';
+import { follow, unfollow, setUsers, setCurrentPage, 
+setTotalUsersCount, toogleIsFetching, getUsers } from '../../redux/users-reducer';
 
 let mapStateToProps = (state) => {
     return {
@@ -12,27 +12,8 @@ let mapStateToProps = (state) => {
         isFetching:state.userPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow:(userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow:(userId) => {
-            dispatch(UnfollowAC(userId));
-        },
-        setUsers:(users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAc(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toogleIsFetching: (isFetching) => {
-            dispatch(toogleIsFetchingAC(isFetching))
-        }
-    }
-}
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersC);
+
+
+const UsersContainer = connect(mapStateToProps,{follow,unfollow,setUsers,setCurrentPage,
+    setTotalUsersCount,toogleIsFetching, getUsers})(UsersC);
 export default UsersContainer;

@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const Follow =  'Follow';
 const UnFollow =  'UnFollow';
 const Set_Users = 'SetUsers';
@@ -5,19 +7,51 @@ const Set_Current_Page = 'Set_Current_Page';
 const Set_Total_Users_Count = 'Set_Total_Users_Count';
 const Toogle_Is_Fetching = 'Toogle_Is_Fetching';
 
-export const followAC = (userId) => ({type: Follow, userId});
-export const UnfollowAC = (userId) => ({type: UnFollow, userId});
-export const setUsersAC = (users) => ({type: Set_Users, users});
-export const setCurrentPageAc = (currentPage) => ({type: Set_Current_Page, currentPage});
-export const setTotalUsersCountAC= (totalUsersCount) => ({type: Set_Total_Users_Count, count:totalUsersCount});
-export const toogleIsFetchingAC= (isFetching) => ({type: Toogle_Is_Fetching, isFetching});
+export const followSuccess = (userId) => ({type: Follow, userId});
+export const unfollowSucces = (userId) => ({type: UnFollow, userId});
+export const setUsers = (users) => ({type: Set_Users, users});
+export const setCurrentPage = (currentPage) => ({type: Set_Current_Page, currentPage});
+export const setTotalUsersCount= (totalUsersCount) => ({type: Set_Total_Users_Count, count:totalUsersCount});
+export const toogleIsFetching= (isFetching) => ({type: Toogle_Is_Fetching, isFetching});
 
 
+export const getUsers = (currentPage,pageSize)=> {
+    return (dispatch) => {
+        
+        dispatch(toogleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))        
+        });
+    }
+}
+
+export const follow = (userId)=> {
+    return (dispatch) => {
+        usersAPI.follow(userId)
+        .then(Response => {
+            if (Response.data.resultCode == 0) {
+            dispatch(followSuccess(userId))
+            }
+        });
+    }
+}
+
+export const unfollow = (userId)=> {
+    return (dispatch) => {
+        usersAPI.unfollow(userId)
+        .then(Response => {
+            if (Response.data.resultCode == 0) {
+            dispatch(unfollowSucces(userId))
+            }
+        });
+    }
+}
 let initialState =  {
         users:[],
         pageSize:5,
         totalUsersCount:0,
-        currentPage:3,
+        currentPage:1,
         isFetching:true
 };
 

@@ -1,33 +1,21 @@
 import React from 'react';
-import *as axios from 'axios';
 import Users from './users';
 import Preloader from '../common/preloader/preloader';
 
 class UsersC extends React.Component {
 
     componentDidMount() {
-        this.props.toogleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${this.props.currentPage}&count=${this.props.pageSize}`,{
-          //  withCredentials:true
-        })
-        .then(Response => {
-        this.props.setUsers(Response.data.items)
-        this.props.setTotalUsersCount(Response.data.totalCount)
-        
-        });
+        this.props.getUsers(this.props.currentPage,this.props.pageSize);
     }
     onPageChanged = (pageNumber) => {
+        this.props.getUsers(pageNumber,this.props.pageSize);
         this.props.setCurrentPage(pageNumber);
-        this.props.toogleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=
-        ${pageNumber}&count=${this.props.pageSize}`,{
-            //withCredentials:true
-        })
-        .then(Response => {
-        this.props.toogleIsFetching(false);
-        this.props.setUsers(Response.data.items);
-        });
+        // this.props.toogleIsFetching(true);
+        // usersAPI.getUsers(pageNumber, this.props.pageSize)
+        // .then(data => {
+        // this.props.toogleIsFetching(false);
+        // this.props.setUsers(data.items);
+        // });
     }
     render() {
         return (
