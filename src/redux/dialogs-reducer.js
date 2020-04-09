@@ -33,5 +33,11 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
- export default dialogsReducer;
+
+export default dialogsReducer;
+
+export const sendMessage = () => ({type:Send_Message});
+export const updateNewMessage = (text) => {
+    return {type: Update_New_Message, newText: text}
+};
 

@@ -49,3 +49,9 @@ export const getProfile = (userId) => {
           });
       }
     }
+
+export const addPost = () => ({type: Add_Post});
+export const UpdateNewPostText = (text) => {
+    return {type:Update_New_Post_Text, newText: text}
+};
+    

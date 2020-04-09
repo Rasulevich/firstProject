@@ -1,13 +1,6 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 
-const Send_Message = 'Send-Message';
-const Update_New_Message = 'Update-New-Message';
-
-const Add_Post =  'Add-Post';
-const Update_New_Post_Text = 'Update-New-Post-Text';
-
-
 let store = {
     _state : {
         postPage: { 
@@ -48,16 +41,5 @@ let store = {
         this._callSubscriber(this._state);     
     }
 } 
-
-
-export const sendMessageActionCreator = () => ({type:Send_Message});
-export const updateNewMessageActionCreator = (text) => {
-    return {type: Update_New_Message, newText: text}
-};
-
-export const addPostActionCreator = () => ({type: Add_Post});
-export const UpdateNewPostTextActionCreator = (text) => {
-    return {type:Update_New_Post_Text, newText: text}
-};
 
 window.store = store;

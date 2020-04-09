@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 
 const DialogItem = (props) => {
@@ -31,6 +31,7 @@ const Dialogs = (props) => {
         let body = e.target.value;
         props.updateNewMessage(body);
     }
+
 
     return (
         <div className={s.dialogs}>

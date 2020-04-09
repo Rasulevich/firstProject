@@ -8,7 +8,8 @@ import News from './components/News/News';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Shop from './components/Shop/Shop';
 import UsersContainer from './components/Users/UsersContainer';
-import HeaderContainer from './components/Header/Header copy';
+import HeaderContainer from './components/Header/Header container';
+import { LoginPage } from './components/Login/login';
 
 const App = (props) => {
   
@@ -18,11 +19,12 @@ const App = (props) => {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path = '/dialogs'render= {() => <DialogsContainer store={props.store} dispatch={props.dispatch} />} />
+          <Route path = '/dialogs'render= {() => <DialogsContainer  />} />
           <Route path ='/profile/:userId?'
-          render = {() => <ProfileContainer store={props.store} state={props.state} dispatch={props.dispatch} />  } />
-          <Route path ='/users'render = {() => <UsersContainer store={props.store} state={props.state} dispatch={props.dispatch} />  } />
+           render = {() => <ProfileContainer/>} />
+          <Route path ='/users'render = {() => <UsersContainer  />} />
           <Route path ='/news'component={News} />
+          <Route path ='/login'render = {() => <LoginPage />} />
           <Route path ='/shop'component={Shop} />
           <Route path ='/contacts'component={Contacts} />
           </div>

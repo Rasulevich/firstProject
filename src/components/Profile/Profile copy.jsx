@@ -1,12 +1,10 @@
 import React from 'react';
-import *as axios from 'axios';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { setUserProfile } from '../../redux/profile-reducer';
-import { withRouter } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
+import { withRouter, Redirect } from 'react-router-dom';
 import { getProfile } from '../../redux/profile-reducer';
-
+import withAuthRedirect from '../hoc/withAuthRedirect';
 
 class ProfileC extends React.Component {
 
@@ -16,10 +14,6 @@ class ProfileC extends React.Component {
       userId = 2;
     }
     this.props.getProfile(userId)
-    //usersAPI.getProfile(userId)
-  //     .then(Response => {
-  //       this.props.setUserProfile(Response.data)
-  //     });
    }
 
   render() {
@@ -30,9 +24,9 @@ class ProfileC extends React.Component {
     )
   }
 }
-
+let AuthRedirectComponent = withAuthRedirect(ProfileC);
 let mapStateToProps = (state) => ({
   profile: state.postPage.profile
 })
-let WithUrlDataContainerComponent = withRouter(ProfileC)
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 export default connect(mapStateToProps, { setUserProfile, getProfile })(WithUrlDataContainerComponent);
