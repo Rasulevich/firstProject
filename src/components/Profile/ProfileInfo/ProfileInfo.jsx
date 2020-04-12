@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/preloader/preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -18,6 +19,7 @@ const ProfileInfo = (props) => {
       <div>{contacts.github}</div>
       <div>{contacts.website}</div>
       <div>{contacts.instagram}</div>  
+      <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
     </div>
   )
 }

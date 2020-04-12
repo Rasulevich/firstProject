@@ -1,8 +1,9 @@
-import { usersAPI } from "../api/api";
+import { usersAPI, profileAPI } from "../api/api";
 
 const Add_Post =  'Add-Post';
 const Update_New_Post_Text = 'Update-New-Post-Text';
 const set_User_Profile = 'setUserProfile';
+const Set_Status = 'Set_Status';
 
 let initialState =  {
         post:[
@@ -11,7 +12,8 @@ let initialState =  {
         {message:' Go on' , id:3}
     ],
     newPostText: 'MuslimShop',
-    profile:null
+    profile:null,
+    status: ""
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -33,6 +35,9 @@ const profileReducer = (state = initialState, action) => {
         case set_User_Profile: {
             return {...state, profile:action.profile}
         }
+        case Set_Status: {
+            return {...state, status:action.status}
+        }
         default:
             return state;
 }
@@ -40,6 +45,8 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 export const setUserProfile = (profile) => ({type:set_User_Profile, profile});
+export const setStatus = (status) => ({type:Set_Status, status});
+
 
 export const getProfile = (userId) => {
     return (dispatch) => {
@@ -50,6 +57,26 @@ export const getProfile = (userId) => {
       }
     }
 
+ export const getStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(Response => {
+            dispatch(setStatus(Response.data))
+            });
+          }
+        }
+
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+        .then(Response => {
+            if (Response.data.resultCode ===0){
+            dispatch(setStatus(status))
+            }
+          });
+      }
+    }
+    
 export const addPost = () => ({type: Add_Post});
 export const UpdateNewPostText = (text) => {
     return {type:Update_New_Post_Text, newText: text}

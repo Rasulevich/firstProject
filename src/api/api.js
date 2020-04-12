@@ -41,4 +41,11 @@ export const usersAPI = {
     }
 }
 
-        
+export const profileAPI = {
+    getStatus (userId){
+        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/status/` + userId)
+    },
+    updateStatus (status) {
+        return axios.put(`https://social-network.samuraijs.com/api/1.0/profile/status`, {status})
+    }
+}
