@@ -14,6 +14,6 @@ let mapStateToProps = (state) => {
 };
 
 
-const ProfileContainer = connect(mapStateToProps,{UpdateNewPostText,addPost,getProfile, getStatus, updateStatus, setStatus})(ProfileC);
+const ProfileContainer = connect(mapStateToProps,{addPost,getProfile, getStatus, updateStatus, setStatus})(ProfileC);
 
 export default ProfileContainer;

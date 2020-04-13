@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import { NavLink, Redirect } from 'react-router-dom';
+import { Field } from 'redux-form';
 
 
 const DialogItem = (props) => {
@@ -16,7 +17,7 @@ const MessageItem = (props) => {
         <div className={s.message}>{props.message}</div>
     )
 }
-const Dialogs = (props) => {
+export const Dialogs = (props) => {
     
     
     let dialogsElement = props.dialogPage.dialog.map (d => (<DialogItem name= {d.name} id ={d.id}/>)); 
@@ -48,4 +49,14 @@ const Dialogs = (props) => {
         </div>
     )
 }
-export default Dialogs;
+
+const DialogForm = (props) =>{
+    return (
+        <form>
+            <Field component={'textarea'}  name ={newMessage }/> 
+               <div>
+                   <button onClick> Send Message</button>
+                   </div>
+        </form>
+    )
+}
