@@ -9,7 +9,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import Shop from './components/Shop/Shop';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/Header container';
-import { LoginPage } from './components/Login/login';
+import { Login } from './components/Login/login';
 
 const App = (props) => {
   
@@ -24,7 +24,7 @@ const App = (props) => {
            render = {() => <ProfileContainer/>} />
           <Route path ='/users'render = {() => <UsersContainer  />} />
           <Route path ='/news'component={News} />
-          <Route path ='/login'render = {() => <LoginPage />} />
+          <Route path ='/login'render = {() => <Login />} />
           <Route path ='/shop'component={Shop} />
           <Route path ='/contacts'component={Contacts} />
           </div>
