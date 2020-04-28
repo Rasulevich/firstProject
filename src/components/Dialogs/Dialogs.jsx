@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -15,13 +15,10 @@ const DialogItem = (props) => {
 }
 
 const MessageItem = (props) => {
-    return (
-        <div className={s.message}>{props.message}</div>
-    )
-}
-const Dialogs = (props) => {
-    
-    
+    return <div className={s.message}>{props.message}</div>
+} 
+
+const Dialogs = React.memo(props => {
     let dialogsElement = props.dialogPage.dialog.map (d => (<DialogItem name= {d.name} id ={d.id}/>)); 
     let messagesElement =props.dialogPage.message.map(m =>(<MessageItem message = {m.message} id ={m.id} />));
     
@@ -33,10 +30,11 @@ const Dialogs = (props) => {
     //     let body = e.target.value;
     //     props.updateNewMessage(body);
     // }
-
-    let newMessage = (value) => { debugger;
-        //props.sendMessage(value.newMessageChange);
-    }
+    let newMessage = (value) => { 
+        props.sendMessage(value.newMessageChange);
+       // alert ('gggg')
+     }
+  
 
     return (
         <div className={s.dialogs}>
@@ -49,7 +47,7 @@ const Dialogs = (props) => {
             </div>
         </div>
     )
-}
+});
 export default Dialogs;
 
 const maxLength100 = maxLengthCreator(100);
@@ -65,4 +63,4 @@ const DialogChange = (props) =>{
         </form>
     )
 }
-let DialogChangeForm = reduxForm({form:'dialogChangeForm'})(DialogChange);
+const DialogChangeForm = reduxForm({form:'dialogChangeForm'})(DialogChange);

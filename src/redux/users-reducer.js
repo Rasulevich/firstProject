@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { updateObjectInArray } from "../components/utils/helper";
 
 const Follow =  'Follow';
 const UnFollow =  'UnFollow';
@@ -15,39 +16,30 @@ export const setTotalUsersCount= (totalUsersCount) => ({type: Set_Total_Users_Co
 export const toogleIsFetching= (isFetching) => ({type: Toogle_Is_Fetching, isFetching});
 
 
-export const getUsers = (currentPage,pageSize)=> {
-    return (dispatch) => {
-        
+export const getUsers = (currentPage,pageSize)=> async (dispatch) => {
         dispatch(toogleIsFetching(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))        
-        });
+        let response = await usersAPI.getUsers(currentPage, pageSize)
+            dispatch(setUsers(response.data.items))
+            dispatch(setTotalUsersCount(response.data.totalCount))        
     }
-}
 
-export const follow = (userId)=> {
-    return (dispatch) => {
-        usersAPI.follow(userId)
-        .then(Response => {
-            if (Response.data.resultCode == 0) {
+
+export const follow = (userId)=> async (dispatch) => {
+       let response = await usersAPI.follow(userId)
+            if (response.data.resultCode == 0) {
             dispatch(followSuccess(userId))
             }
-        });
     }
-}
 
-export const unfollow = (userId)=> {
-    return (dispatch) => {
-        usersAPI.unfollow(userId)
-        .then(Response => {
-            if (Response.data.resultCode == 0) {
+
+export const unfollow = (userId)=> async (dispatch) => {
+    let response = await usersAPI.unfollow(userId)
+            if (response.data.resultCode == 0) {
             dispatch(unfollowSucces(userId))
             }
-        });
     }
-}
-let initialState =  {
+
+    let initialState =  {
         users:[],
         pageSize:5,
         totalUsersCount:0,
@@ -60,22 +52,25 @@ const usersReducer = (state = initialState, action) => {
         case Follow: 
             return {
                 ...state, 
-                users:state.users.map(u => {
-                    if (u.id === action.userId){
-                        return {...u , followed: true}
-                    }
-                    return u;
-                })
+                users:updateObjectInArray(state.users,action.userId, "id", {followed: true})
+                // users:state.users.map(u => {
+                //     if (u.id === action.userId){
+                //         return {...u , followed: true}
+                //     }
+                //     return u;
+                // })
             }
         case UnFollow:
             return {
                 ...state,
-                users:state.users.map(u=>{
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users:updateObjectInArray(state.users, action.userId, "id", {followed: false})
+
+                // users:state.users.map(u=>{
+                //     if (u.id === action.userId) {
+                //         return {...u, followed: false}
+                //     }
+                //     return u;
+                // })
             }
         case Set_Users : {
             return {...state,users:action.users}
