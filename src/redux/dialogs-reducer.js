@@ -8,7 +8,7 @@ let initialState = {
     ],
     message:[
         {id:'1', message:'Hello Mr.'},
-        {id:'2', message:'Where is my money?'},
+        {id:'2', message:'Where are you from?'},
         {id:'3', message:'I from OAE'}
     ]
 };   

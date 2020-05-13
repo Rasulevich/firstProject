@@ -1,6 +1,9 @@
 import { usersAPI } from "../api/api";
+import { updateObjectInArray } from "../components/utils/helper";
+
 
 const Friends =  'Frends';
+const UnFollow =  'UnFollow';
 
 let initialState =  {
     contact:[],
@@ -11,7 +14,12 @@ const contactReducer = (state = initialState, action) => {
     switch (action.type) {
         case Friends: {
             return {...state, contact:action.contact}
-        }       
+        }
+        case UnFollow:
+            return {
+                ...state,
+                contact:updateObjectInArray(state.contact, action.userId, "id", {followed: false})
+            }      
         default:
             return state;
 }
@@ -24,8 +32,18 @@ export const getContact = (currentPage,pageSize)=> async (dispatch) =>
             dispatch(setContact(response.data.items))
     }
 
+export const unfollow = (userId)=> async (dispatch) => {
+    let response = await usersAPI.unfollow(userId)
+            if (response.data.resultCode == 0) {
+            dispatch(unfollowSucces(userId))
+            }
+    }  
+
+
 
 export const setContact = (contact) => ({type:Friends, contact});
+export const unfollowSucces = (userId) => ({type: UnFollow, userId});
+
 
 
 

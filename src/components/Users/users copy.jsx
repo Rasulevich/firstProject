@@ -20,7 +20,7 @@ class UsersC extends React.Component {
     render() {
         return (
             <>
-            {this.props.isFetching ?<Preloader/> : null}
+            {!this.props.isFetching ? <Preloader/> : null}
                 <Users 
                 currentPage = {this.props.currentPage}
                 users = {this.props.users}
@@ -35,3 +35,4 @@ class UsersC extends React.Component {
     }
 }
 export default UsersC;
+// npm install gh-pages --save -dev

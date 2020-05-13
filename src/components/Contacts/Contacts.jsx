@@ -15,7 +15,9 @@ const Contacts = (props) => {
             <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.photo}/>
             {u.status}
             {u.name}
+            <button onClick={() => {props.unfollow(u.id)} } > UnFollow</button>
             </span> : null}
+            
             </div>
         </div>)}
     </div>

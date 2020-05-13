@@ -7,10 +7,10 @@ const Set_Status = 'Set_Status';
 let initialState =  {
         post:[
         {message:'Hello people !!!', id:1},
-        {message:'Tell me why?', id:2},
+        {message:'How are you?', id:2},
         {message:' Go on' , id:3}
     ],
-    newPostText: 'MuslimShop',
+    newPostText: 'New Text',
     profile:null,
     status: ""
 };
