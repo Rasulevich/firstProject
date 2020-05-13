@@ -32,7 +32,6 @@ const Dialogs = React.memo(props => {
     // }
     let newMessage = (value) => { 
         props.sendMessage(value.newMessageChange);
-       // alert ('gggg')
      }
   
 
